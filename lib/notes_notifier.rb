@@ -1,5 +1,6 @@
 require "notes_notifier/version"
-require 'slack_bot'
+require "addressable/uri"
+
 #require 'slack_bot/app/models/notify'
 
 module NotesNotifier
