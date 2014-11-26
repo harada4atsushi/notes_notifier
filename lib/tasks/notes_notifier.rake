@@ -1,7 +1,7 @@
 require 'rails/source_annotation_extractor'
 
 desc <<-EOS
-  desc. mofmof
+  desc. notes_notify
 EOS
 task :notes_notify do
   options = { tag: true }
@@ -22,6 +22,7 @@ task :notes_notify do
   end
 
   message = "FIXME: #{fixme_count}\nTODO: #{todo_count}\nHACK: #{hack_count}"
+  puts message
 
   query = {
     token: NotesNotifier.token,
@@ -33,6 +34,10 @@ task :notes_notify do
   uri = Addressable::URI.parse(NotesNotifier.endpoint)
   uri.query_values ||= {}
   uri.query_values = uri.query_values.merge(query)
+  response = Net::HTTP.get(URI.parse(uri))
+  json = JSON.parse(response)
 
-  Net::HTTP.get(URI.parse(uri))
+  unless json["ok"]
+    puts json["error"]
+  end
 end
