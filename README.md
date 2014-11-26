@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+application.rb
+
+```
+NotesNotifier.setup do |config|
+  config.token = ENV["SLACK_API_TOKEN"]
+  config.channel = "#general"
+  config.bot_name = "notify bot"
+end
+```
 
 ## Contributing
 
