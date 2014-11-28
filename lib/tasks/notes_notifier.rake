@@ -3,7 +3,7 @@ require 'rails/source_annotation_extractor'
 desc <<-EOS
   desc. notes_notify
 EOS
-task :notes_notify do
+task :notes_notify => :environment do
   options = { tag: true }
   extractor = SourceAnnotationExtractor.new("FIXME|TODO|HACK")
   dirs = %w(app config db lib test) + (ENV['SOURCE_ANNOTATION_DIRECTORIES'] || '').split(',')
